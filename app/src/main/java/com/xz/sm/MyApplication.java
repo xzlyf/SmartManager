@@ -22,7 +22,6 @@ public class MyApplication extends Application {
     private void initLog() {
         Logger.init()                 // default PRETTYLOGGER or use just init()
                 .methodCount(3)                 // default 2
-                .hideThreadInfo()               // default shown
                 .logLevel(LogLevel.FULL)        // default LogLevel.FULL
                 .methodOffset(2);              // default 0
     }

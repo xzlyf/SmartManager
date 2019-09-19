@@ -28,6 +28,8 @@ public interface Contract {
 
         void lToast(String text);//长显示
 
+        void showData(Object object);//异步结果回到主线程
+
         void showLoading(String msg);//显示等待框
 
         void dissmissLoading(String msg);//隐藏等待框

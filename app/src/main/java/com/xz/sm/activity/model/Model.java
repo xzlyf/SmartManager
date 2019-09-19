@@ -1,5 +1,6 @@
 package com.xz.sm.activity.model;
 
+import com.orhanobut.logger.Logger;
 import com.xz.sm.contract.Contract;
 import com.xz.sm.utils.IOStreamUtil;
 

@@ -1,6 +1,9 @@
 package com.xz.sm.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -10,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.orhanobut.logger.Logger;
 import com.xz.sm.MyApplication;
 import com.xz.sm.contract.Contract;
 import com.xz.sm.utils.ToastUtil;
@@ -17,12 +21,22 @@ import com.xz.sm.utils.ToastUtil;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements Contract.View {
-    public int options = View.GONE;
+    private final int backMain = 1452;
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case backMain:
+                    showData(msg.obj);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
         MyApplication.getInstance().addActivity(this);
@@ -31,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Contract
 
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -40,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Contract
 
     /**
      * 自动隐藏软键盘
+     *
      * @param ev
      * @return
      */
@@ -95,6 +111,19 @@ public abstract class BaseActivity extends AppCompatActivity implements Contract
     }
 
 
+    /**
+     * 异步结果回到主线程
+     *
+     * @param object
+     */
+    public void backToUI(Object object) {
+        Message msg = handler.obtainMessage();
+        msg.what = backMain;
+        msg.obj = object;
+        handler.sendMessage(msg);
+
+    }
+
 
     @Override
     public void sToast(String text) {
@@ -104,6 +133,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Contract
     @Override
     public void lToast(String text) {
         ToastUtil.Shows_LONG(this, text);
+    }
+
+    @Override
+    public void showData(Object object) {
+
     }
 
     @Override
