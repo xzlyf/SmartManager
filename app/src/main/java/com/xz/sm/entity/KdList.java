@@ -3,12 +3,22 @@ package com.xz.sm.entity;
 public class KdList {
 
 
-    private String ShipperName;
-    private String ShipperCode;
+    private String ShipperName;//快递名字
+    private String ShipperCode;//公司代号
+    private String ShipperNo;//快递单号
 
-    public KdList(String name,String code) {
+    public KdList(String name,String code,String shipperNo) {
         this.ShipperName = name;
         this.ShipperCode = code;
+        this.ShipperNo = shipperNo;
+    }
+
+    public String getShipperNo() {
+        return ShipperNo;
+    }
+
+    public void setShipperNo(String shipperNo) {
+        ShipperNo = shipperNo;
     }
 
     public String getShipperName() {

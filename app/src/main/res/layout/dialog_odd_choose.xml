@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_yuanjiao"
     android:orientation="vertical">
-
+    <!--抬头-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.85dp"
         android:background="#969696" />
+    <!--提示框-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +64,15 @@
             android:singleLine="true"/>
 
     </LinearLayout>
-
+    <!--搜索框-->
+    <android.support.v7.widget.SearchView
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/background_yuanjiao_2"
+        android:layout_gravity="center"
+        android:id="@+id/search_kd"/>
+    <!--列表-->
     <ListView
         android:background="@color/gray"
         android:id="@+id/oddListView"

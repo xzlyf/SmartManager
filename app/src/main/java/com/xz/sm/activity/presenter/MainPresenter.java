@@ -45,8 +45,8 @@ public class MainPresenter implements Contract.Presenter {
      * 快递查询
      * 即时查询API 3000次/每小时
      *
-     * @param expCode
-     * @param expNo
+     * @param expCode 快递公司代号
+     * @param expNo 快递单号
      * @throws Exception
      */
     public void expCheck(String expCode, String expNo) throws Exception {
@@ -68,7 +68,7 @@ public class MainPresenter implements Contract.Presenter {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 Log.d(TAG, "onResponse: " + response.body().string());
-                activity.backToUI("1");
+
             }
         });
     }
@@ -109,13 +109,15 @@ public class MainPresenter implements Contract.Presenter {
 
                     if (obj.getBoolean("Success")) {
                         //成功
-
+                        String no = obj.getString("LogisticCode");
                         JSONArray obj2 = obj.getJSONArray("Shippers");
                         List<KdList> kdLists = new ArrayList<>();
                         JSONObject obj3;
                         for (int i = 0; i < obj2.length(); i++) {
                             obj3 = obj2.getJSONObject(i);
-                            kdLists.add(new KdList(obj3.getString("ShipperName"), obj3.getString("ShipperCode")));
+                            kdLists.add(new KdList(obj3.getString("ShipperName")
+                                    , obj3.getString("ShipperCode")
+                                    ,no));
                         }
 
                         activity.backToUI(kdLists);
