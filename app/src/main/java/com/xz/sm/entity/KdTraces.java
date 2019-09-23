@@ -1,5 +1,6 @@
 package com.xz.sm.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KdTraces {
@@ -13,12 +14,12 @@ public class KdTraces {
      * Success : true
      */
 
-    private String LogisticCode;
-    private String ShipperCode;
-    private String State;
+    private String LogisticCode;//物流单号
+    private String ShipperCode;//	快递公司编码
+    private String State;//物流状态：2-在途中,3-签收,4-问题件
     private String EBusinessID;
-    private boolean Success;
-    private List<TracesBean> Traces;
+    private boolean Success;//	成功与否
+    private List<KdAccept> Traces = new ArrayList<>();
 
     public String getLogisticCode() {
         return LogisticCode;
@@ -60,37 +61,12 @@ public class KdTraces {
         this.Success = Success;
     }
 
-    public List<TracesBean> getTraces() {
+    public List<KdAccept> getTraces() {
         return Traces;
     }
 
-    public void setTraces(List<TracesBean> Traces) {
+    public void setTraces(List<KdAccept> Traces) {
         this.Traces = Traces;
     }
 
-    public static class TracesBean {
-        /**
-         * AcceptStation : 【广州市】  广东主城区公司广州番禺石基镇服务部-黄祖乾(13078800231) 已揽收
-         * AcceptTime : 2019-09-17 22:14:02
-         */
-
-        private String AcceptStation;
-        private String AcceptTime;
-
-        public String getAcceptStation() {
-            return AcceptStation;
-        }
-
-        public void setAcceptStation(String AcceptStation) {
-            this.AcceptStation = AcceptStation;
-        }
-
-        public String getAcceptTime() {
-            return AcceptTime;
-        }
-
-        public void setAcceptTime(String AcceptTime) {
-            this.AcceptTime = AcceptTime;
-        }
-    }
 }

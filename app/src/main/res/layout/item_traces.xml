@@ -4,20 +4,29 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <View
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:background="@drawable/background_yuanxin"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <!--原点-->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/background_yuanxin" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/accept_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2019-09-17 22:14:02"
@@ -25,6 +34,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/accept_station"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="【广州市】  广东主城区公司广州番禺石基镇服务部-黄祖乾(13078800231) 已揽收" />

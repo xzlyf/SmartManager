@@ -9,6 +9,7 @@ import com.xz.sm.constan.Local;
 import com.xz.sm.contract.Contract;
 import com.xz.sm.activity.model.Model;
 import com.xz.sm.entity.KdList;
+import com.xz.sm.entity.KdTraces;
 import com.xz.sm.utils.KdnSignUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -62,12 +63,18 @@ public class MainPresenter implements Contract.Presenter {
         mModel.post_Asyn(Local.expCheckURL, params, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.w(TAG, "onFailure: ");
+                Logger.w("onFailure: ");
+                activity.sToast("快递查询失败");
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                Log.d(TAG, "onResponse: " + response.body().string());
+                String jsonData = response.body().string();
+                Logger.w("onResponse: " + jsonData);
+
+                Gson gson = new Gson();
+                KdTraces kdt = gson.fromJson(jsonData,KdTraces.class);
+                activity.backToUI(kdt);
 
             }
         });

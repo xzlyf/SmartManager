@@ -56,7 +56,6 @@ public class Model implements Contract.Model {
      */
     @Override
     public void post_Asyn(String url, Map<String, String> parmars, Callback callback) {
-
         client = new OkHttpClient();
         client.newBuilder()
                 .readTimeout(10, TimeUnit.SECONDS)
