@@ -20,6 +20,7 @@ import com.xz.sm.contract.ItemOnclickListener;
 import com.xz.sm.custom.OddChoostDialog;
 import com.xz.sm.entity.KdList;
 import com.xz.sm.entity.KdTraces;
+import com.xz.sm.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         submit.setOnClickListener(this);
         closeBtn.setOnClickListener(this);
+        searchDelete.setOnClickListener(this);
 
 
     }
@@ -80,6 +82,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             List<KdList> kdLists = new ArrayList<>();
             for (Object o : (List<?>) object) {
                 kdLists.add((KdList) o);
+            }
+
+            if (kdLists.size()==0){
+                sToast("暂无快递信息");
+                return;
             }
 
             //打开选择框
@@ -136,6 +143,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             adapter.refresh(kd.getTraces());
 
             info1.setVisibility(View.VISIBLE);
+
+            //保存为历史记录
+
+
         }
     }
 
@@ -149,8 +160,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     if (!searchInput.getText().toString().trim().equals("")) {
                         presenter.oddCheck(searchInput.getText().toString().trim());
                     } else {
-                        sToast("快递单号不可为空");
-                        return;
+                            sToast("快递单号不可为空");
+                            return;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -159,6 +170,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.close_btn:
                 adapter.cleanAll();
                 info1.setVisibility(View.GONE);
+                break;
+            case R.id.search_delete:
+                searchInput.setText("");
                 break;
         }
     }
